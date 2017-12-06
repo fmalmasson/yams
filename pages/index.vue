@@ -1,5 +1,5 @@
 <template>
-  <v-layout row>
+  <v-layout row :style="{'background-image': 'url(' + wallpaper + ')', 'background-size': 'cover'}">
     <v-flex class="selectedPlayers" xs2>
       <v-flex d-flex>
         <v-select class="select-input"
@@ -18,6 +18,7 @@
         <v-btn small color="primary" dark @click.native.stop="startGame">Start</v-btn>
         <v-btn small color="primary" dark @click.native.stop="nextGame">Next</v-btn>
         <v-btn small color="primary" dark @click.native.stop="reload">Reload</v-btn>
+        <v-btn small color="primary" dark @click.native.stop="dialog = true">wallpaper</v-btn>
     </v-flex>
 
     <v-flex class="player" xs2 v-for="(player, index) in players">
@@ -25,7 +26,19 @@
     :index="index"
     :player="player"></player>
   </v-flex>
-
+  <v-dialog v-model="dialog" max-width="290">
+      <v-card>
+        <v-card-title class="headline">Changer le fond d'ecran</v-card-title>
+        <v-card-text>collez ici l'adresse de votre image préferée</v-card-text>
+        <v-flex xs12>
+          <v-text-field
+            @change="setNewWallpaper"
+            name="input-1"
+            v-model="wallpaper"
+          ></v-text-field>
+        </v-flex>
+      </v-card>
+    </v-dialog>
   </v-layout>
 
 </template>
@@ -43,6 +56,12 @@
       Player,
       GameMenu
     },
+    // props: {
+    //   wallpaper: {
+    //     type: String,
+    //     default: 'dice3.jpg'
+    //   }
+    // },
     data: () => ({
       // dialog: true,
       // newGame: false,
@@ -50,6 +69,8 @@
       // gameLoaded: false,
       // nextGameLoaded: false,
       // playersPlaying: [],
+      wallpaper: 'https://images.alphacoders.com/257/thumb-1920-257863.jpg',
+      dialog: false,
       winner: '',
       items: ['Fab', 'Soso', 'François', 'Alex', 'Clem', 'Jess', 'Judus'],
       selectedPlayers: []
@@ -128,6 +149,9 @@
           }
           this.winner = winning
         })
+      },
+      setNewWallpaper () {
+        this.$emit('changeWallpaper', this.wallpaper)
       }
     },
     computed: {
