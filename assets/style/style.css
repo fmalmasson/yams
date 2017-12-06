@@ -1,0 +1,20 @@
+.application--light {
+  background-image: url(./../../static/dice3.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.display {
+  padding: 0;
+}
+.input-group.input-group--solo .input-group__input {
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+.application--light .input-group input {
+  text-align: center;
+  padding-bottom: 3px;
+  font-size: large;
+  font-weight: 700;
+}

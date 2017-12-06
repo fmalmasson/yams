@@ -1,0 +1,53 @@
+# projectId: cj95j733l1bv20142kk16r6vn
+# version: 37
+
+type File @model {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
+
+type Game @model {
+  ace: Int! @defaultValue(value: 0)
+  bonusYams: Int! @defaultValue(value: 0)
+  brelan: Int! @defaultValue(value: 0)
+  carre: Int! @defaultValue(value: 0)
+  five: Int! @defaultValue(value: 0)
+  four: Int! @defaultValue(value: 0)
+  full: Int! @defaultValue(value: 0)
+  grandeSuite: Int! @defaultValue(value: 0)
+  id: ID! @isUnique
+  moins: Int! @defaultValue(value: 0)
+  petiteSuite: Int! @defaultValue(value: 0)
+  player: Player @relation(name: "GameOnPlayer")
+  plus: Int! @defaultValue(value: 0)
+  six: Int! @defaultValue(value: 0)
+  three: Int! @defaultValue(value: 0)
+  totalBas: Int @defaultValue(value: 0)
+  totalDiff: Int @defaultValue(value: 0)
+  totalGame: Int @defaultValue(value: 0)
+  totalHaut: Int @defaultValue(value: 0)
+  totalSuites: Int @defaultValue(value: 0)
+  two: Int! @defaultValue(value: 0)
+  win: Boolean
+  yams: Int! @defaultValue(value: 0)
+  yamsSec: Int! @defaultValue(value: 0)
+}
+
+type Player @model {
+  games: [Game!]! @relation(name: "GameOnPlayer")
+  id: ID! @isUnique
+  name: String!
+}
+
+type User @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  updatedAt: DateTime!
+}
