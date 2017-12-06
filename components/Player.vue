@@ -224,7 +224,11 @@ export default {
       return 'hsla(' + Math.round(this.total / 4.8) + ', 100%, 50%, 0.15)'
     },
     totalHigh () {
-      let total = _.reduce(this.player.score.top, (sum, v) => (sum + Number(v)))
+      let values = []
+      _.forEach(Object.values(this.player.score.top), (score) => {
+        values.push(Number(score))
+      })
+      let total = _.reduce(values, (sum, v) => (sum + v))
       if (total >= 63) {
         total += 50
       }
@@ -249,7 +253,11 @@ export default {
       return total
     },
     totalBottom () {
-      let total = _.reduce(this.player.score.bottom, (sum, v) => (sum + Number(v)))
+      let values = []
+      _.forEach(Object.values(this.player.score.bottom), (score) => {
+        values.push(Number(score))
+      })
+      let total = _.reduce(values, (sum, v) => (sum + v))
       return total
     },
     total () {
