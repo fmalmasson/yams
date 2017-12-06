@@ -3,7 +3,7 @@
     <v-flex class="selectedPlayers" xs2>
       <v-flex d-flex>
         <v-select class="select-input"
-              v-bind:items="items"
+              v-bind:items="orderItems"
               v-model="selectedPlayers"
               label="Joueurs"
               single-line
@@ -44,23 +44,18 @@
       GameMenu
     },
     data: () => ({
-      dialog: true,
-      newGame: false,
-      menu: false,
-      gameLoaded: false,
-      nextGameLoaded: false,
-      playersPlaying: [],
+      // dialog: true,
+      // newGame: false,
+      // menu: false,
+      // gameLoaded: false,
+      // nextGameLoaded: false,
+      // playersPlaying: [],
       winner: '',
       items: ['Fab', 'Soso', 'François', 'Alex', 'Clem', 'Jess', 'Judus'],
       selectedPlayers: []
     }),
     methods: {
       ...mapActions(['reset', 'addPlayer', 'setPlayers']),
-      clearPlayers () {
-        if (this.selectedPlayers.length === 0) {
-          this.reset()
-        }
-      },
       startGame () {
         _.forEach(this.selectedPlayers, (player) => {
           this.addPlayer(
@@ -117,37 +112,11 @@
         localStorage.clear()
         _.forEach(this.players, (player) => localStorage.setItem(player.name, JSON.stringify(player)))
       },
-      close () {
-        this.dialog = false
-        this.newGame = true
-      },
-      cancelAddPlayer () {
-        this.dialog = false
-        this.newGame = false
-      },
-      openPlayerModal () {
-        this.reset()
-        this.dialog = true
-        this.gameLoaded = false
-        this.playersPlaying = []
-        localStorage.clear()
-      },
-      closeMenu () {
-        this.reset()
-        this.newGame = false
-      },
       reload () {
         this.reset()
         for (let i = 0; i < localStorage.length; i += 1) {
           this.addPlayer(JSON.parse(localStorage.getItem(localStorage.key(i))))
         }
-      },
-      resetScore () {
-        this.reset()
-        // _.forEach(this.playersPlaying, (player) => {
-        //   this.addPlayer(this.playerModel)
-        // })
-        this.nextGameLoaded = true
       },
       whoWins () {
         let score = 0
