@@ -1,24 +1,68 @@
 <template>
   <v-layout row :style="{'background-image': 'url(' + wallpaper + ')', 'background-size': 'cover'}">
     <v-flex class="selectedPlayers" xs2>
-      <v-flex d-flex>
-        <v-select class="select-input"
-              v-bind:items="orderItems"
-              v-model="selectedPlayers"
-              label="Joueurs"
-              single-line
-              light
-              item-value="text"
-              multiple
-              tags
-              clearable
-              @change="reset"
-            ></v-select>
-      </v-flex>
-        <v-btn small color="primary" dark @click.native.stop="startGame">Start</v-btn>
-        <v-btn small color="primary" dark @click.native.stop="nextGame">Next</v-btn>
-        <v-btn small color="primary" dark @click.native.stop="reload">Reload</v-btn>
-        <v-btn small color="primary" dark @click.native.stop="dialog = true">wallpaper</v-btn>
+      <v-navigation-drawer
+  temporary
+  v-model="drawer"
+  dark
+  absolute
+>
+  <v-list class="pa-1">
+      <v-list-tile-content>
+        <v-list-tile-title>Menu</v-list-tile-title>
+      </v-list-tile-content>
+      </v-list-tile-action>
+    </v-list-tile>
+  </v-list>
+  <v-list class="pt-0" dense>
+    <v-select class="select-input"
+          v-bind:items="orderItems"
+          v-model="selectedPlayers"
+          label="Joueurs"
+          single-line
+          light
+          item-value="text"
+          multiple
+          tags
+          clearable
+          @change="reset"
+        ></v-select>
+    <v-divider></v-divider>
+    <v-list-tile @click="startGame">
+      <v-list-tile-action>
+        <v-icon></v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title>Start</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile @click="nextGame">
+      <v-list-tile-action>
+        <v-icon></v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title>Partie suivante</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile @click="reload">
+      <v-list-tile-action>
+        <v-icon></v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title>Recharger partie perdue</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <v-list-tile @click="dialog = true">
+      <v-list-tile-action>
+        <v-icon></v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title>Changer fond d'écran</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+  </v-list>
+</v-navigation-drawer>
+        <v-btn round small color="primary" dark @click.native.stop="drawer = true">Menu</v-btn>
     </v-flex>
 
     <v-flex class="player" xs2 v-for="(player, index) in players">
@@ -26,7 +70,7 @@
     :index="index"
     :player="player"></player>
   </v-flex>
-  <v-dialog v-model="dialog" max-width="290">
+  <v-dialog v-model="dialog" max-width="600px">
       <v-card>
         <v-card-title class="headline">Changer le fond d'ecran</v-card-title>
         <v-card-text>collez ici l'adresse de votre image préferée</v-card-text>
@@ -69,6 +113,25 @@
       // gameLoaded: false,
       // nextGameLoaded: false,
       // playersPlaying: [],
+      actions: [
+        {
+          'name': 'Start',
+          'action': this.startGame
+        },
+        {
+          'name': 'Next Game',
+          'action': this.nextGame
+        },
+        {
+          'name': 'Reload',
+          'action': this.reload
+        },
+        {
+          'name': 'wallpaper',
+          'action': this.setNewWallpaper
+        }
+      ],
+      drawer: false,
       wallpaper: 'https://images.alphacoders.com/257/thumb-1920-257863.jpg',
       dialog: false,
       winner: '',
@@ -189,6 +252,8 @@ padding: 5px;
 align-items: center;
 }
 .select-input{
-  width: 15vw;
+padding: 0; /*width: 15vw;*/
+padding-top: 2vh;
+  margin: 0;
 }
 </style>
