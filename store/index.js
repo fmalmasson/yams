@@ -1,11 +1,26 @@
 import Vuex from 'vuex'
+import axios from 'axios'
+import _ from 'lodash'
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      players: []
+      players: [],
+      users: []
     },
     mutations: {
+      ADD_USER: (state, user) => {
+        state.users = []
+        axios.get('https://api.mlab.com/api/1/databases/yams/collections/players?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh')
+          .then(function (response) {
+            _.forEach(response.data, (user) => {
+              state.users.push(user)
+            })
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
       ADD_PLAYER: (state, player) => {
         state.players.push(player)
       },
@@ -56,9 +71,12 @@ const createStore = () => {
     },
     getters: {
       players: state => (state.players),
-      player: state => (state.player)
+      users: state => (state.users)
     },
     actions: {
+      addUser ({ commit }, user) {
+        commit('ADD_USER', user)
+      },
       addPlayer ({ commit }, player) {
         commit('ADD_PLAYER', player)
       },

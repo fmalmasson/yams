@@ -16,12 +16,12 @@
   </v-list>
   <v-list class="pt-0" dense>
     <v-select class="select-input"
-          v-bind:items="orderItems"
+          v-bind:items="items"
           v-model="selectedPlayers"
           label="Joueurs"
           single-line
           light
-          item-value="text"
+          item-text="name"
           multiple
           tags
           clearable
@@ -93,7 +93,7 @@
   import Player from './../components/Player'
   import GameMenu from './../components/GameMenu'
   import _ from 'lodash'
-
+  import axios from 'axios'
   export default {
     components: {
       PlayerModal,
@@ -135,16 +135,38 @@
       wallpaper: 'https://images.alphacoders.com/257/thumb-1920-257863.jpg',
       dialog: false,
       winner: '',
-      items: ['Fab', 'Soso', 'François', 'Alex', 'Clem', 'Jess', 'Judus'],
-      selectedPlayers: []
+      items: [],
+      selectedPlayers: [],
+      posts: null,
+      apiKey: 'Abe_aqSvB_QidC68ajjmEsIWU6clrskh',
+      game: {
+        'firstName': 'Fred',
+        'lastName': 'Flintstone'
+      }
     }),
     methods: {
-      ...mapActions(['reset', 'addPlayer', 'setPlayers']),
+      ...mapActions(['reset', 'addPlayer', 'setPlayers', 'addUser']),
+      addToApi () {
+
+      },
       startGame () {
+        _.forEach(this.selectedPlayers, (player) => {
+          if (this.items.indexOf(player.name) === -1) {
+            axios.post('https://api.mlab.com/api/1/databases/yams/collections/players?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', {'name': player.name})
+              .then(function (response) {
+                console.log(response)
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+          }
+        })
+        this.$store.dispatch('addUser')
         _.forEach(this.selectedPlayers, (player) => {
           this.addPlayer(
             {
-              name: player,
+              name: player.name,
+              id: player._id.$oid,
               win: false,
               score: {
                 top: {
@@ -178,6 +200,13 @@
         })
       },
       nextGame () {
+        // axios.post('https://api.mlab.com/api/1/databases/yams/collections/games?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', this.players)
+        //   .then(function (response) {
+        //     console.log(response)
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error)
+        //   })
         let idxFirstPlayer = ''
         _.forEach(this.players, (player) => {
           if (player.name === this.winner) {
@@ -218,10 +247,24 @@
       }
     },
     computed: {
-      ...mapGetters(['players']),
+      ...mapGetters(['players', 'users']),
       orderItems () {
         return this.items.sort()
+      },
+      getItems () {
+        return this.users
       }
+    },
+    watch: {
+      getItems: {
+        handler () {
+          this.items = []
+          _.forEach(this.users, (user) => this.items.push(user))
+        }
+      }
+    },
+    mounted () {
+      this.$store.dispatch('addUser')
     }
   }
 </script>

@@ -11,8 +11,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "firebase": "^4.6.0",
     "nuxt": "^1.0.0-rc11",
+    "pg": "^7.4.0",
     "vuefire": "^1.4.4",
     "vuetify": "^0.16.1"
   },
