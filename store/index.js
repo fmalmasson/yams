@@ -36,6 +36,7 @@ const createStore = () => {
           newGame.push(
             {
               name: state.players[i].name,
+              id: state.players[i].id,
               score: {
                 top: {
                   one: null,
