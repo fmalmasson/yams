@@ -193,20 +193,21 @@
                   bonusYams: null,
                   yamsSec: null
                 },
-                total: null
+                total: null,
+                yamsDone: 0
               }
             }
           )
         })
       },
       nextGame () {
-        // axios.post('https://api.mlab.com/api/1/databases/yams/collections/games?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', this.players)
-        //   .then(function (response) {
-        //     console.log(response)
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error)
-        //   })
+        axios.post('https://api.mlab.com/api/1/databases/yams/collections/scores?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', this.players)
+          .then(function (response) {
+            console.log(response)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
         let idxFirstPlayer = ''
         _.forEach(this.players, (player) => {
           if (player.name === this.winner) {
