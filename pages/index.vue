@@ -167,7 +167,7 @@
             {
               name: player.name,
               id: player._id.$oid,
-              win: false,
+              win: '',
               score: {
                 top: {
                   one: null,
@@ -201,6 +201,9 @@
         })
       },
       nextGame () {
+        _.forEach(this.players, (player) => {
+          player.name === this.winner ? player.win = 'Oui' : player.win = 'Non'
+        })
         axios.post('https://api.mlab.com/api/1/databases/yams/collections/scores?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', this.players)
           .then(function (response) {
             console.log(response)
@@ -212,7 +215,7 @@
         _.forEach(this.players, (player) => {
           if (player.name === this.winner) {
             idxFirstPlayer = idxFirstPlayer === this.players.length - 1 ? 0 : this.players.indexOf(player) + 1
-            alert(idxFirstPlayer)
+            // alert(idxFirstPlayer)
           }
         })
         const newOrder = this.players.slice(idxFirstPlayer, this.players.length)

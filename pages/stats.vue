@@ -1,13 +1,41 @@
 <template>
-  <div class="stats">
-    <div class="global-stats">
-      <v-btn color="primary" @click.once="getStats">Primary</v-btn>
-  <!-- <global-stats></global-stats> -->
-  </div>
-<div class="individual-stats">
-  <!-- <player-stats></player-stats>
-  <player-stats></player-stats> -->
-</div>
+  <div class="stats_page">
+    <v-text-field
+        append-icon="search"
+        label="Search"
+        single-line
+        hide-details
+        v-model="search"
+      ></v-text-field>
+    <v-data-table
+      v-bind:search="search"
+      v-bind:headers="headers"
+      :items="items"
+      class="elevation-1"
+    >
+    <template slot="items" scope="props">
+      <td>{{ props.item.name }}</td>
+      <td class="text-xs-right">{{ props.item.score.top.one }}</td>
+      <td class="text-xs-right">{{ props.item.score.top.two }}</td>
+      <td class="text-xs-right">{{ props.item.score.top.three }}</td>
+      <td class="text-xs-right">{{ props.item.score.top.four }}</td>
+      <td class="text-xs-right">{{ props.item.score.top.five }}</td>
+      <td class="text-xs-right">{{ props.item.score.top.six }}</td>
+      <td class="text-xs-right">{{ props.item.score.diff.lowest }}</td>
+      <td class="text-xs-right">{{ props.item.score.diff.highest }}</td>
+      <td class="text-xs-right">{{ props.item.score.straights.small }}</td>
+      <td class="text-xs-right">{{ props.item.score.straights.high }}</td>
+      <td class="text-xs-right">{{ props.item.score.bottom.threeOfAKind }}</td>
+      <td class="text-xs-right">{{ props.item.score.bottom.fullHouse }}</td>
+      <td class="text-xs-right">{{ props.item.score.bottom.fourOfAKind }}</td>
+      <td class="text-xs-right">{{ props.item.score.bottom.yams }}</td>
+      <td class="text-xs-right">{{ props.item.score.bottom.bonusYams }}</td>
+      <td class="text-xs-right">{{ props.item.score.bottom.yamsSec }}</td>
+      <td class="text-xs-right">{{ props.item.score.total }}</td>
+      <td class="text-xs-right">{{ props.item.win }}</td>
+    </template>
+  </v-data-table>
+      <v-btn color="primary" @click.native.stop="getStats">Primary</v-btn>
   </div>
 </template>
 
@@ -24,20 +52,56 @@ export default {
     playerStats
   },
   data: () => ({
-    statistics: ['toto']
+    pagination: {
+      sortBy: 'total'
+    },
+    search: '',
+    headers: [
+      {
+        text: 'Joueur',
+        align: 'left',
+        sortable: false,
+        value: 'name'
+      },
+      { text: 'Les 1', value: 'one' },
+      { text: 'Les 2', value: 'two' },
+      { text: 'Les 3', value: 'three' },
+      { text: 'Les 4', value: 'four' },
+      { text: 'Les 5', value: 'five' },
+      { text: 'Les 6', value: 'six' },
+      { text: 'moins', value: 'lowest' },
+      { text: 'plus', value: 'highest' },
+      {
+        text: 'Petite Suite',
+        align: 'left',
+        sortable: false,
+        value: 'small'
+      },
+      { text: 'Grande Suite', value: 'high' },
+      { text: 'Brelan', value: 'threeOfAKind' },
+      { text: 'Full', value: 'fullHouse' },
+      { text: 'Carré', value: 'fourOfAKind' },
+      { text: 'Yams', value: 'yams' },
+      { text: 'Bonus Yams', value: 'bonusYams' },
+      { text: 'Yams Sec', value: 'yamsSec' },
+      { text: 'Total', value: 'total' },
+      { text: 'Win', value: 'win' }
+    ],
+    items: []
   }),
   methods: {
     ...mapActions(['addUser']),
     getStats () {
-      _.forEach(this.users, (user) => {
-        axios.get('https://api.mlab.com/api/1/databases/yams/collections/scores?q={"name": "' + user.name + '"}&apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh')
-          .then((response) => {
-            this.statistics.push({[user.name]: response.data})
+      axios.get('https://api.mlab.com/api/1/databases/yams/collections/scores?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh')
+        .then((response) => {
+          console.log(response.data)
+          _.forEach(response.data, (rep) => {
+            this.items.push(rep)
           })
-          .catch((error) => {
-            console.log(error)
-          })
-      })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   },
   computed: {
@@ -70,12 +134,10 @@ export default {
 
 <style>
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
+th {
+  padding: 0;
 }
+
 .individual-stats {
   display: flex;
   flex-direction: column;
