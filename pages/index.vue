@@ -148,6 +148,7 @@
       dialog: false,
       winner: '',
       items: [],
+      names: [],
       selectedPlayers: [],
       posts: null,
       apiKey: 'Abe_aqSvB_QidC68ajjmEsIWU6clrskh',
@@ -163,7 +164,8 @@
       },
       startGame () {
         _.forEach(this.selectedPlayers, (player) => {
-          if (this.items.indexOf(player.name) === -1) {
+          if (this.names.indexOf(player.name) === -1) {
+            console.log('new player')
             axios.post('https://api.mlab.com/api/1/databases/yams/collections/players?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', {'name': player.name})
               .then(function (response) {
                 console.log(response)
@@ -275,7 +277,11 @@
       getItems: {
         handler () {
           this.items = []
-          _.forEach(this.users, (user) => this.items.push(user))
+          this.names = []
+          _.forEach(this.users, (user) => {
+            this.items.push(user)
+            this.names.push(user.name)
+          })
         }
       }
     },
