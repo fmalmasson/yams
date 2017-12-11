@@ -35,7 +35,7 @@
       <td class="text-xs-right">{{ props.item.win }}</td>
     </template>
   </v-data-table>
-      <v-btn color="primary" @click.native.stop="getStats">Primary</v-btn>
+      <v-btn color="primary" @click.native.stop="getStats">Statistiques</v-btn>
   </div>
 </template>
 

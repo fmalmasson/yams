@@ -52,6 +52,14 @@
         <v-list-tile-title>Recharger partie perdue</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
+      <v-list-tile>
+      <v-list-tile-action>
+        <v-icon></v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title><nuxt-link to="/stats">Statistiques</nuxt-link></v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
     <v-list-tile @click="dialog = true">
       <v-list-tile-action>
         <v-icon></v-icon>
@@ -125,6 +133,10 @@
         {
           'name': 'Reload',
           'action': this.reload
+        },
+        {
+          'name': 'statistiques',
+          'action': ''
         },
         {
           'name': 'wallpaper',
