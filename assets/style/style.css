@@ -17,3 +17,7 @@
   font-size: large;
   font-weight: 700;
 }
+.application .theme--dark.navigation-drawer {
+    background-color: #35495E;
+
+}

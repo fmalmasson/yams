@@ -21,7 +21,7 @@
                 </v-flex>
                 <v-flex class="input-block" xs3>
                   <v-text-field solo single-line
-                  class="input-score"
+                  class="input-score body-2"
                   name="input-1-3"
                   v-model.number="player.score.top[name]"
                   ></v-text-field>

@@ -11,7 +11,7 @@
 
     <v-navigation-drawer
       v-model="drawer"
-      dark
+      light
       temporary
       enable-resize-watcher
       app

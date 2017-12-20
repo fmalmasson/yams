@@ -1,15 +1,17 @@
-<template>
+  <template>
   <v-layout row :style="{'background-image': 'url(' + wallpaper + ')', 'background-size': 'cover'}">
     <v-flex class="selectedPlayers" xs2>
       <v-navigation-drawer
+      class="menu"
   temporary
   v-model="drawer"
   dark
   absolute
+  height="50%"
 >
   <v-list class="pa-1">
       <v-list-tile-content>
-        <v-list-tile-title>Menu</v-list-tile-title>
+        <v-list-tile-title>Let's play Yams</v-list-tile-title>
       </v-list-tile-content>
       </v-list-tile-action>
     </v-list-tile>
@@ -18,7 +20,7 @@
     <v-select class="select-input"
           v-bind:items="items"
           v-model="selectedPlayers"
-          label="Joueurs"
+          label="Slectionne les joueurs"
           single-line
           light
           item-text="name"
@@ -30,7 +32,7 @@
     <v-divider></v-divider>
     <v-list-tile @click="startGame">
       <v-list-tile-action>
-        <v-icon></v-icon>
+        <v-icon>play_arrow</v-icon>
       </v-list-tile-action>
       <v-list-tile-content>
         <v-list-tile-title>Start</v-list-tile-title>
@@ -38,7 +40,7 @@
     </v-list-tile>
     <v-list-tile @click="nextGame">
       <v-list-tile-action>
-        <v-icon></v-icon>
+        <v-icon>skip_next</v-icon>
       </v-list-tile-action>
       <v-list-tile-content>
         <v-list-tile-title>Partie suivante</v-list-tile-title>
@@ -46,15 +48,15 @@
     </v-list-tile>
     <v-list-tile @click="reload">
       <v-list-tile-action>
-        <v-icon></v-icon>
+        <v-icon>refresh</v-icon>
       </v-list-tile-action>
       <v-list-tile-content>
         <v-list-tile-title>Recharger partie perdue</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
-      <v-list-tile>
+      <v-list-tile @click="">
       <v-list-tile-action>
-        <v-icon></v-icon>
+        <v-icon>show_chart</v-icon>
       </v-list-tile-action>
       <v-list-tile-content>
         <v-list-tile-title><nuxt-link to="/stats">Statistiques</nuxt-link></v-list-tile-title>
@@ -62,13 +64,17 @@
     </v-list-tile>
     <v-list-tile @click="dialog = true">
       <v-list-tile-action>
-        <v-icon></v-icon>
+        <v-icon>wallpaper</v-icon>
       </v-list-tile-action>
       <v-list-tile-content>
         <v-list-tile-title>Changer fond d'écran</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
   </v-list>
+  <v-divider></v-divider>
+<div class="record-div">
+  <div><span class="record-total">Nono - 599</span></div>
+</div>
 </v-navigation-drawer>
         <v-btn round small color="primary" dark @click.native.stop="drawer = true">Menu</v-btn>
     </v-flex>
@@ -144,7 +150,7 @@
         }
       ],
       drawer: false,
-      wallpaper: 'https://images.alphacoders.com/257/thumb-1920-257863.jpg',
+      wallpaper: 'http://www.goodwp.com/images/201103/goodwp.com_16589.jpg',
       dialog: false,
       winner: '',
       items: [],
@@ -291,6 +297,32 @@
   }
 </script>
 <style>
+.record-div {
+  padding-top: 10px;
+  display: flex;
+  justify-content: left;
+}
+.record {
+  color: white;
+  font-size: 15px;
+}
+.record-player {
+  font-size: 20px;
+  color: white;
+}
+.record-total {
+  padding-left: 15px;
+  font-size: 20px;
+  color: white;
+
+}
+a {
+  text-decoration: none;
+}
+.menu {
+  top: 25%;
+  border-radius: 0 10px 10px 0;
+}
 .player {
 padding: 5px;
 }
@@ -310,11 +342,10 @@ padding: 5px;
   border-radius: 5px;
 }
 .selectedPlayers {
-  margin-top: 30vh;
-  height: 20vh;
+  margin-top: 0;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-align-items: center;
+  align-items: center;
 }
 .select-input{
 padding: 0; /*width: 15vw;*/

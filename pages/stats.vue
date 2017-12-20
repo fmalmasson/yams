@@ -15,6 +15,7 @@
     >
     <template slot="items" scope="props">
       <td>{{ props.item.name }}</td>
+      <td class="text-xs-right">{{ props.item.score.total }}</td>
       <td class="text-xs-right">{{ props.item.score.top.one }}</td>
       <td class="text-xs-right">{{ props.item.score.top.two }}</td>
       <td class="text-xs-right">{{ props.item.score.top.three }}</td>
@@ -31,7 +32,6 @@
       <td class="text-xs-right">{{ props.item.score.bottom.yams }}</td>
       <td class="text-xs-right">{{ props.item.score.bottom.bonusYams }}</td>
       <td class="text-xs-right">{{ props.item.score.bottom.yamsSec }}</td>
-      <td class="text-xs-right">{{ props.item.score.total }}</td>
       <td class="text-xs-right">{{ props.item.win }}</td>
     </template>
   </v-data-table>
@@ -63,6 +63,7 @@ export default {
         sortable: false,
         value: 'name'
       },
+      { text: 'Total', value: 'score.total' },
       { text: 'Les 1', value: 'score.top.one' },
       { text: 'Les 2', value: 'score.top.two' },
       { text: 'Les 3', value: 'score.top.three' },
@@ -79,7 +80,6 @@ export default {
       { text: 'Yams', value: 'score.bottom.yams' },
       { text: 'Bonus Yams', value: 'score.bottom.bonusYams' },
       { text: 'Yams Sec', value: 'score.bottom.yamsSec' },
-      { text: 'Total', value: 'score.total' },
       { text: 'Win', value: 'win' }
     ],
     items: []
