@@ -1,4 +1,5 @@
 <template>
+  <v-layout row :style="{'background-image': 'url(' + wallpaper + ')', 'background-size': 'cover', 'height': '100vh'}">
   <div class="stats_page">
     <v-text-field
         append-icon="search"
@@ -37,6 +38,7 @@
   </v-data-table>
       <v-btn color="primary" @click.native.stop="getStats">Statistiques</v-btn>
   </div>
+</v-layout>
 </template>
 
 <script>
@@ -52,6 +54,7 @@ export default {
     playerStats
   },
   data: () => ({
+    wallpaper: 'https://cdn3.geckoandfly.com/wp-content/uploads/2013/11/Left_Right_Brain.jpg',
     pagination: {
       sortBy: 'total'
     },

@@ -150,7 +150,7 @@
         }
       ],
       drawer: false,
-      wallpaper: 'http://www.goodwp.com/images/201103/goodwp.com_16589.jpg',
+      wallpaper: 'https://images.alphacoders.com/257/257863.jpg',
       dialog: false,
       winner: '',
       items: [],
