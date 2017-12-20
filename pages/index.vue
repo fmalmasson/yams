@@ -2,25 +2,24 @@
   <v-layout row :style="{'background-image': 'url(' + wallpaper + ')', 'background-size': 'cover'}">
     <v-flex class="selectedPlayers" xs2>
       <v-navigation-drawer
-      class="menu"
-  temporary
-  v-model="drawer"
-  dark
-  absolute
-  height="50%"
->
-  <v-list class="pa-1">
-      <v-list-tile-content>
-        <v-list-tile-title>Let's play Yams</v-list-tile-title>
-      </v-list-tile-content>
-      </v-list-tile-action>
-    </v-list-tile>
-  </v-list>
+        class="menu"
+        temporary
+        v-model="drawer"
+        dark
+        absolute
+        height="50%">
+        <v-list class="pa-1">
+          <v-list-tile-content>
+            <v-list-tile-title>Yams</v-list-tile-title>
+          </v-list-tile-content>
+          </v-list-tile-action>
+        </v-list-tile>
+        </v-list>
   <v-list class="pt-0" dense>
     <v-select class="select-input"
           v-bind:items="items"
           v-model="selectedPlayers"
-          label="Slectionne les joueurs"
+          label="Selectionne les joueurs"
           single-line
           light
           item-text="name"
@@ -54,14 +53,23 @@
         <v-list-tile-title>Recharger partie perdue</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
-      <v-list-tile @click="">
+    <v-list-tile @click="" href="/stats">
+      <v-list-tile-action>
+        <v-icon>show_chart</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title>Statistiques</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
+      <!-- <v-list-tile @click="">
       <v-list-tile-action>
         <v-icon>show_chart</v-icon>
       </v-list-tile-action>
       <v-list-tile-content>
         <v-list-tile-title><nuxt-link to="/stats">Statistiques</nuxt-link></v-list-tile-title>
       </v-list-tile-content>
-    </v-list-tile>
+    </v-list-tile> -->
     <v-list-tile @click="dialog = true">
       <v-list-tile-action>
         <v-icon>wallpaper</v-icon>
@@ -82,7 +90,8 @@
     <v-flex class="player" xs2 v-for="(player, index) in players">
     <player @save="saveGame(), whoWins()"
     :index="index"
-    :player="player"></player>
+    :player="player"
+    :key="index"></player>
   </v-flex>
   <v-dialog v-model="dialog" max-width="600px">
       <v-card>
@@ -150,7 +159,7 @@
         }
       ],
       drawer: false,
-      wallpaper: 'https://images.alphacoders.com/257/257863.jpg',
+      wallpaper: 'http://www.goodwp.com/images/201103/goodwp.com_16589.jpg',
       dialog: false,
       winner: '',
       items: [],

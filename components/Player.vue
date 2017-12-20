@@ -15,7 +15,8 @@
 
             <v-container class="haut">
 
-              <v-layout class="height-4vh" row v-for="(score, name) in player.score.top" >
+              <v-layout class="height-4vh" row v-for="(score, name) in player.score.top"
+              :key="index">
                 <v-flex xs12>
                   <v-subheader class="dices height-4vh" ><img class="dice-png-haut" :src="`dices/${name}.png`"/></v-subheader>
                 </v-flex>
