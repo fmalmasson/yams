@@ -7,7 +7,7 @@
         v-model="drawer"
         dark
         absolute
-        height="50%">
+        height="60%">
         <v-list class="pa-1">
           <v-list-tile-content>
             <v-list-tile-title>Yams</v-list-tile-title>
@@ -84,7 +84,7 @@
   <div><span class="record-total">Nono - 599</span></div>
 </div>
 </v-navigation-drawer>
-        <v-btn round small color="primary" dark @click.native.stop="drawer = true">Menu</v-btn>
+        <v-btn round small  dark @click.native.stop="drawer = true">Menu</v-btn>
     </v-flex>
 
     <v-flex class="player" xs2 v-for="(player, index) in players">
@@ -324,12 +324,13 @@
   font-size: 20px;
   color: white;
 
+
 }
 a {
   text-decoration: none;
 }
 .menu {
-  top: 25%;
+  top: 20%;
   border-radius: 0 10px 10px 0;
 }
 .player {
@@ -346,9 +347,8 @@ padding: 5px;
   height: auto;
 }
 
-.application--light .card, .application .theme--light.card{
-  background-color: white;
-  border-radius: 5px;
+.application--light .list{
+  background-color: #4F4743;
 }
 .selectedPlayers {
   margin-top: 0;
@@ -357,8 +357,9 @@ padding: 5px;
   align-items: center;
 }
 .select-input{
-padding: 0; /*width: 15vw;*/
+padding: 10px; /*width: 15vw;*/
 padding-top: 2vh;
   margin: 0;
 }
+
 </style>

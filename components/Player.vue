@@ -190,7 +190,7 @@
             <v-container class="haut">
               <v-layout  class="total height-4vh" :style="{'background-color': color}">
                 <v-flex class="grand-total-div"xs12>
-                  <v-subheader class="grand-total-text display-1">{{ total }}</v-subheader>
+                  <v-subheader class="grand-total-text-2 display-1">{{ total }}</v-subheader>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -335,13 +335,20 @@ li {
   align-items: center;
 }
 .grand-total-text {
+   font-weight: 700;
+
+ }
+.grand-total-text-2 {
   font-weight: 700;
+  font-family: Fallout;
 }
 .player-name{
   display:flex;
   justify-content: center;
   font-size: 20px;
   color: black;
+  font-family: Fallout;
+
 }
 .dice-png-haut{
   width: 20%;
@@ -353,4 +360,5 @@ li {
   max-width: 100%
   max-height: 100%
 }
+
 </style>

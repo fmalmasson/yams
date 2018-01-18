@@ -9,10 +9,11 @@
         v-model="search"
       ></v-text-field>
     <v-data-table
+
       v-bind:search="search"
       v-bind:headers="headers"
       :items="items"
-      class="elevation-1"
+      class="scroll elevation-1 scroll-x"
     >
     <template slot="items" scope="props">
       <td>{{ props.item.name }}</td>
@@ -136,6 +137,9 @@ th {
   padding: 0;
 }
 
+.scroll {
+  scrollX: true;
+}
 .individual-stats {
   display: flex;
   flex-direction: column;

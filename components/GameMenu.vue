@@ -10,8 +10,8 @@
     </v-avatar>
 
     <v-navigation-drawer
+      class="game-menu"
       v-model="drawer"
-      light
       temporary
       enable-resize-watcher
       app
@@ -22,7 +22,7 @@
             <img src="dice.png" />
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title>Yams</v-list-tile-title>
+            <v-list-tile-title class="menu-title">Yams</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-btn icon @click.native.stop="mini = !mini">
@@ -111,7 +111,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.game-menu {
+  height: 100vh;
+}
 .dice-menu {
   position: absolute;
   top: 50vh;
@@ -121,4 +125,5 @@ export default {
 a {
   text-decoration: none;
 }
+
 </style>

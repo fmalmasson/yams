@@ -18,6 +18,18 @@
   font-weight: 700;
 }
 .application .theme--dark.navigation-drawer {
-    background-color: #35495E;
-
+    background-color: #212121;
 }
+.btn {
+  height: 80px;
+  border-radius: 5px;
+  font-family: Fallout;
+  letter-spacing: 3px;
+  font-size: 20px;
+}
+
+@font-face {
+  font-family: 'fallout'; /*a name to be used later*/
+  src: url('../../static/FalloutFont.ttf'); /*URL to font*/
+}
+
