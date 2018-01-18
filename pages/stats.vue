@@ -37,7 +37,7 @@
       <td class="last-td text-xs-center">{{ props.item.win }}</td>
     </template>
   </v-data-table>
-      <v-btn color="primary" @click.native.stop="getStats">Statistiques</v-btn>
+
   </div>
 </v-layout>
 </template>
@@ -93,7 +93,6 @@ export default {
     getStats () {
       axios.get('https://api.mlab.com/api/1/databases/yams/collections/scores?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh')
         .then((response) => {
-          console.log(response.data)
           _.forEach(response.data, (rep) => {
             this.items.push(rep)
           })
@@ -125,8 +124,8 @@ export default {
   //     }
   //   }
   // },
-  mounted () {
-    this.$store.dispatch('addUser')
+  created () {
+    this.getStats()
   }
 }
 </script>
