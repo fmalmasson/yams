@@ -35,7 +35,7 @@
                 label="Créer un joueur"
                 single-line
                 prepend-icon="add"
-                @keypress.enter="addPlayer"
+                @keypress.enter="createPlayer()"
                 v-model="newPlayer"
         ></v-text-field>
       </v-list-tile-content>
@@ -186,7 +186,7 @@
     }),
     methods: {
       ...mapActions(['reset', 'addPlayer', 'setPlayers', 'addUser']),
-      addPlayer () {
+      createPlayer () {
         axios.post('https://api.mlab.com/api/1/databases/yams/collections/players?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', {'name': this.newPlayer})
           .then(function (response) {
           })
@@ -197,7 +197,6 @@
         this.$store.dispatch('addUser')
       },
       startGame () {
-        this.$store.dispatch('addUser')
         _.forEach(this.selectedPlayers, (player) => {
           this.addPlayer(
             {
