@@ -13,28 +13,28 @@
       v-bind:search="search"
       v-bind:headers="headers"
       :items="items"
-      class="scroll elevation-1 scroll-x"
+      class="text-xs-center scroll elevation-1 scroll-x"
     >
     <template slot="items" scope="props">
       <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.score.total }}</td>
-      <td class="text-xs-right">{{ props.item.score.top.one }}</td>
-      <td class="text-xs-right">{{ props.item.score.top.two }}</td>
-      <td class="text-xs-right">{{ props.item.score.top.three }}</td>
-      <td class="text-xs-right">{{ props.item.score.top.four }}</td>
-      <td class="text-xs-right">{{ props.item.score.top.five }}</td>
-      <td class="text-xs-right">{{ props.item.score.top.six }}</td>
-      <td class="text-xs-right">{{ props.item.score.diff.lowest }}</td>
-      <td class="text-xs-right">{{ props.item.score.diff.highest }}</td>
-      <td class="text-xs-right">{{ props.item.score.straights.small }}</td>
-      <td class="text-xs-right">{{ props.item.score.straights.high }}</td>
-      <td class="text-xs-right">{{ props.item.score.bottom.threeOfAKind }}</td>
-      <td class="text-xs-right">{{ props.item.score.bottom.fullHouse }}</td>
-      <td class="text-xs-right">{{ props.item.score.bottom.fourOfAKind }}</td>
-      <td class="text-xs-right">{{ props.item.score.bottom.yams }}</td>
-      <td class="text-xs-right">{{ props.item.score.bottom.bonusYams }}</td>
-      <td class="text-xs-right">{{ props.item.score.bottom.yamsSec }}</td>
-      <td class="text-xs-right">{{ props.item.win }}</td>
+      <td class="text-xs-center">{{ props.item.score.total }}</td>
+      <td class="text-xs-center">{{ props.item.score.top.one }}</td>
+      <td class="text-xs-center">{{ props.item.score.top.two }}</td>
+      <td class="text-xs-center">{{ props.item.score.top.three }}</td>
+      <td class="text-xs-center">{{ props.item.score.top.four }}</td>
+      <td class="text-xs-center">{{ props.item.score.top.five }}</td>
+      <td class="text-xs-center">{{ props.item.score.top.six }}</td>
+      <td class="text-xs-center">{{ props.item.score.diff.lowest }}</td>
+      <td class="text-xs-center">{{ props.item.score.diff.highest }}</td>
+      <td class="text-xs-center">{{ props.item.score.straights.small }}</td>
+      <td class="text-xs-center">{{ props.item.score.straights.high }}</td>
+      <td class="text-xs-center">{{ props.item.score.bottom.threeOfAKind }}</td>
+      <td class="text-xs-center">{{ props.item.score.bottom.fullHouse }}</td>
+      <td class="text-xs-center">{{ props.item.score.bottom.fourOfAKind }}</td>
+      <td class="text-xs-center">{{ props.item.score.bottom.yams }}</td>
+      <td class="text-xs-center">{{ props.item.score.bottom.bonusYams }}</td>
+      <td class="text-xs-center">{{ props.item.score.bottom.yamsSec }}</td>
+      <td class="last-td text-xs-center">{{ props.item.win }}</td>
     </template>
   </v-data-table>
       <v-btn color="primary" @click.native.stop="getStats">Statistiques</v-btn>
@@ -133,10 +133,6 @@ export default {
 
 <style>
 
-th {
-  padding: 0;
-}
-
 .scroll {
   scrollX: true;
 }
@@ -149,4 +145,5 @@ th {
   width: 40%;
   justify-content: center;
 }
+
 </style>
