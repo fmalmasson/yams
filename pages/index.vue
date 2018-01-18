@@ -17,18 +17,29 @@
         </v-list>
   <v-list class="pt-0" dense>
     <v-select class="select-input"
-          v-bind:items="items"
+          :items="items"
           v-model="selectedPlayers"
           label="Selectionne les joueurs"
-          single-line
           light
           item-text="name"
           multiple
-          tags
+          persistent-hint
           clearable
           @change="reset"
         ></v-select>
     <v-divider></v-divider>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-text-field
+                name="input-1-3"
+                label="Créer un joueur"
+                single-line
+                prepend-icon="add"
+                @keypress.enter="addPlayer"
+                v-model="newPlayer"
+        ></v-text-field>
+      </v-list-tile-content>
+    </v-list-tile>
     <v-list-tile @click="startGame">
       <v-list-tile-action>
         <v-icon>play_arrow</v-icon>
@@ -81,7 +92,7 @@
   </v-list>
   <v-divider></v-divider>
 <div class="record-div">
-  <div><span class="record-total">Nono - 599</span></div>
+  <div><span class="record-total">Record</span></div><div><span class="record-total">Nono avec 599 pts</span></div>
 </div>
 </v-navigation-drawer>
         <v-btn round small  dark @click.native.stop="drawer = true">Menu</v-btn>
@@ -164,6 +175,7 @@
       winner: '',
       items: [],
       names: [],
+      newPlayer: '',
       selectedPlayers: [],
       posts: null,
       apiKey: 'Abe_aqSvB_QidC68ajjmEsIWU6clrskh',
@@ -174,22 +186,17 @@
     }),
     methods: {
       ...mapActions(['reset', 'addPlayer', 'setPlayers', 'addUser']),
-      addToApi () {
-
+      addPlayer () {
+        axios.post('https://api.mlab.com/api/1/databases/yams/collections/players?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', {'name': this.newPlayer})
+          .then(function (response) {
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+        this.newPlayer = ''
+        this.$store.dispatch('addUser')
       },
       startGame () {
-        _.forEach(this.selectedPlayers, (player) => {
-          if (this.names.indexOf(player.name) === -1) {
-            console.log('new player')
-            axios.post('https://api.mlab.com/api/1/databases/yams/collections/players?apiKey=Abe_aqSvB_QidC68ajjmEsIWU6clrskh', {'name': player.name})
-              .then(function (response) {
-                console.log(response)
-              })
-              .catch(function (error) {
-                console.log(error)
-              })
-          }
-        })
         this.$store.dispatch('addUser')
         _.forEach(this.selectedPlayers, (player) => {
           this.addPlayer(
@@ -309,7 +316,9 @@
 .record-div {
   padding-top: 10px;
   display: flex;
-  justify-content: left;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .record {
   color: white;
